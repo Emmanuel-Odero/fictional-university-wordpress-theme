@@ -18,7 +18,7 @@ function university_post_types(){
         'menu_icon'=> 'dashicons-calendar',
     ));
      //The Programs post typen begins here
-     register_post_type('Programs', array(
+     register_post_type('programs', array(
         'supports'=>array('title','editor'),
         'show_in_rest'=>true,
         'rewrite'=>array('slug' => 'programs'),
@@ -26,10 +26,10 @@ function university_post_types(){
         'public'=> true,
         'labels'=> array(
             'name' => 'Programs',
-            'add_new_item'=> 'Add New Programs',
+            'add_new_item'=> 'Add New programs',
             'edit_item'=> 'Edit Programs',
-            'all_items'=>'All Programs',
-            'Singular_name'=>'Program'
+            'all_items'=>'All programs',
+            'Singular_name'=>'program'
         ),
         'menu_icon'=> 'dashicons-awards',
     ));
