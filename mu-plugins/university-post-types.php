@@ -17,7 +17,7 @@ function university_post_types(){
         ),
         'menu_icon'=> 'dashicons-calendar',
     ));
-     //The Programs post typen begins here
+     //The Programs post type begins here
      register_post_type('programs', array(
         'supports'=>array('title','editor'),
         'show_in_rest'=>true,
@@ -31,7 +31,21 @@ function university_post_types(){
             'all_items'=>'All programs',
             'Singular_name'=>'program'
         ),
-        'menu_icon'=> 'dashicons-awards',
+        'menu_icon'=> 'dashicons-welcome-learn-more',
+    ));
+    //The Professors Post type begins here
+    register_post_type('professor', array(
+        'supports'=>array('title','editor'),
+        'show_in_rest'=>true,
+        'public'=> true,
+        'labels'=> array(
+            'name' => 'Professors',
+            'add_new_item'=> 'Add New ',
+            'edit_item'=> 'Edit Professors',
+            'all_items'=>'All professors',
+            'Singular_name'=>'professor'
+        ),
+        'menu_icon'=>'dashicons-businessman'
     ));
 }
 add_action('init','university_post_types');
