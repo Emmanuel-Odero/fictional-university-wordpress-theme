@@ -14,6 +14,14 @@ function university_features(){
     
 }
 function university_adjust_queries($query){
+    //The below is to enable us to manipulate the programs post type if we are the admin and are logged in
+    if(!is_admin() AND is_post_type_archive('program')AND is_main_query()){
+        //---
+        $query->set('orderby','title');
+        $query->set('order','ASC');
+        $query->set('posts_per_page',-1);
+    }
+    //The below is to enable us to manipulate the Events post type if we are the admin and are logged in
     if(!is_admin() AND is_post_type_archive('event')AND $query->is_main_query()){
     $today=date('Ymd');
     $query->set('meta_key', 'event_date');
