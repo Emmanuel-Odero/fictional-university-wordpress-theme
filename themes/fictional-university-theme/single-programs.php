@@ -27,16 +27,9 @@ while(have_posts()){
          $relatedProfessors = new WP_Query(array(
             'posts_per_page'=>-1,
             'post_type'=>'professor',
-            'meta_key'=>'event_date',
-            'orderby'=>'meta_value_num',
+            'orderby'=>'title',
             'order'=>'ASC',
             'meta_query'=>array(
-              array(
-                'key'=>'event_date',
-                'compare'=>'>=',
-                'value'=> $today,
-                'type'=> 'numeric'
-              ),
               array(
                 'key'=> 'related_programs',
                 'compare'=>'LIKE',
@@ -44,37 +37,19 @@ while(have_posts()){
               )
             )
           ));
-          if ($homepageEvents->have_posts()) {
+          if ($relatedProfessors->have_posts()) {
             # code...
             echo '<hr class "section-break">';
-          echo '<h3 class="headline headline--medium">Upcoming ' . get_the_title() . ' Event/s</h3>';
-          while ($homepageEvents->have_posts()) {
+          echo '<h3 class="headline headline--medium">' . get_the_title() . ' Professor/s</h3>';
+          while ($relatedProfessors->have_posts()) {
             # code...
-            $homepageEvents-> the_post(); ?>
-          <div class="event-summary">
-            <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
-              <span class="event-summary__month">
-                  <?php
-                    $eventDate = new DateTime(get_field("event_date"));
-                    echo $eventDate->format("M");
-                  ?>
-              </span>
-              <span class="event-summary__day"><?php echo $eventDate ->format("d"); ?></span>
-            </a>
-            <div class="event-summary__content">
-              <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-              <p><?php if(has_excerpt()){
-                echo get_the_excerpt();
-              } else {
-                echo wp_trim_words(get_the_content(),12);
-              }
-              ?><a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
-            </div>
-          </div>
+            $relatedProfessors-> the_post(); ?>
+          <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
          <?php }
           }
           //<!--*********************************************************************-->
-         <?php
+          //We need to reset post data so as to display the events data we do this by having the function wp_reset_post_data()
+         wp_reset_postdata();
           $today =date('Ymd');
           $homepageEvents = new WP_Query(array(
             'posts_per_page'=>2,
