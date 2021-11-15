@@ -7,7 +7,7 @@ while(have_posts()){
       <div class="page-banner__content container container--narrow">
         <h1 class="page-banner__title"><?php the_title(); ?></h1>
         <div class="page-banner__intro">
-          <p>Please Replace Me Later.</p>
+          <p><?php the_field('page_banner_subtitle') ?></p>
         </div>
       </div>
     </div>
@@ -16,10 +16,10 @@ while(have_posts()){
       <div class="generic-content">
         <div class="row group">
           <div class="one-third">
-          <?php the_post_thumbnail(); ?>
-            <div class="two-thirds">
-            <?php the_content(); ?>
-            </div>
+             <?php the_post_thumbnail('professorPortrait'); ?>
+          </div>
+          <div class="two-thirds">
+             <?php the_content(); ?>
           </div>
 
         </div>
@@ -30,9 +30,13 @@ while(have_posts()){
           echo '<h3 class="headline headline--medium">Field Of Specialty</h3>';
           echo '<ul class="link-list min-list">';
           foreach($relatedPrograms as $program){?>
-            <li><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title($program);  ?></a></li>
+            <li>
+              <a href="<?php echo get_the_permalink($program); ?>">
+                <?php echo get_the_title($program);  ?>
+              </a>
+            </li>
           <?php }
-          echo '<ul>';
+          echo '</ul>';
           }
         ?>
      </div>

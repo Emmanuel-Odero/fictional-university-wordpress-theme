@@ -40,12 +40,19 @@ while(have_posts()){
           if ($relatedProfessors->have_posts()) {
             # code...
             echo '<hr class "section-break">';
-          echo '<h3 class="headline headline--medium">' . get_the_title() . ' Professor/s</h3>';
+            echo '<h3 class="headline headline--medium">' . get_the_title() . ' Professor/s</h3>';
+          echo '<ul class="professor-cards">';
           while ($relatedProfessors->have_posts()) {
             # code...
             $relatedProfessors-> the_post(); ?>
-          <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+          <li class="professor-card__list-item">
+            <a class="professor-card" href="<?php the_permalink(); ?>">
+            <img class="professor-card__image" src="<?php the_post_thumbnail_url('professorLandscape'); ?>">
+            <span class="professor-card__name"><?php the_title(); ?></span>
+          </a>
+          </li>
          <?php }
+         echo '</ul>';
           }
           //<!--*********************************************************************-->
           //We need to reset post data so as to display the events data we do this by having the function wp_reset_post_data()
